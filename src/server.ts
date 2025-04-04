@@ -1,8 +1,10 @@
-import "dotenv/config";                           // ✅ dotenv setup (no error)
+import dotenv from "dotenv";                         
 import http from "http";
 import app from "./app.js";                       // ✅ use .js extensions in ESM
 import { connectDB } from "./config/db.js";
 import { initSocket } from "./config/socket.js";
+
+dotenv.config();
 
 // Create HTTP server
 const server = http.createServer(app);

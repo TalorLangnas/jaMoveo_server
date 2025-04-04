@@ -1,14 +1,14 @@
 import express from "express";
 import cors from "cors";
 
-import userRoutes from "./routes/auth.routes"; // placeholder
+import authRoutes from "./api/auth/auth.routes.js";
+import userRoutes from "./api/user/user.routes.js";
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 
-// API Routes
-app.use("/api/auth", userRoutes); // e.g., /api/auth/signup, /api/auth/login
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 
 export default app;

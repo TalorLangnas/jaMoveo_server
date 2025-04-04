@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { createSessionController, joinSessionController, setActiveSongController, quitSessionController, getCurrentSessionController } from "./session.controller.js";
+import { verifyToken, requireAdmin } from "../../middlewares/auth.middleware.js";
+const router = Router();
+router.post("/", verifyToken, requireAdmin, createSessionController);
+router.post("/:id/join", verifyToken, joinSessionController);
+router.post("/:id/song", verifyToken, requireAdmin, setActiveSongController);
+router.post("/:id/quit", verifyToken, requireAdmin, quitSessionController);
+router.get("/:id", verifyToken, getCurrentSessionController);
+export default router;

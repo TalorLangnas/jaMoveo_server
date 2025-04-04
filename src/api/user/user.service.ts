@@ -1,9 +1,11 @@
-import User from "../../models/user.model.js";
+import User, { IUser } from "../../models/user.model.js";
 
-export const getAllUsers = async () => {
+// Returns an array of users
+export const getAllUsers = async (): Promise<IUser[]> => {
   return await User.find();
 };
 
-export const getUserById = async (id: string) => {
+// Returns a single user or null
+export const getUserById = async (id: string): Promise<IUser | null> => {
   return await User.findById(id);
 };

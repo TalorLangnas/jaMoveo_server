@@ -7,6 +7,7 @@ export interface ISession extends Document {
   connectedUsers: Types.ObjectId[];
   songHistory: Types.ObjectId[];
   isActive: boolean;
+  sessionUrl: string; // Store the generated URL
   createdAt: Date;
 }
 
@@ -17,6 +18,7 @@ const sessionSchema = new Schema<ISession>({
   connectedUsers: [{ type: Schema.Types.ObjectId, ref: "User" }],
   songHistory: [{ type: Schema.Types.ObjectId, ref: "Song" }],
   isActive: { type: Boolean, default: true },
+  sessionUrl: { type: String }, // Store the generated URL
   createdAt: { type: Date, default: Date.now }
 });
 

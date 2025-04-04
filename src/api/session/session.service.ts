@@ -4,17 +4,27 @@ import Song from "../../models/song.model.js";
 import User from "../../models/user.model.js";
 
 export const createSession = async (adminId: string) => {
-  const session = new Session({ admin: adminId });
-  return await session.save();
+  const isLocal = process.env.NODE_ENV === "development";
+  const baseUrl = isLocal ? "http://localhost:5000" : "https://your-production-domain.com"; // Replace with actual production URL
+
+  const sessionUrl = `${baseUrl}/session/${new mongoose.Types.ObjectId().toString()}`; // Convert ObjectId to string
+
+  const session = new Session({
+    admin: adminId,
+    sessionUrl: sessionUrl, // Dynamically set the session URL
+  });
+
+  await session.save();
+  return session; // Return the session with the URL
 };
 
-export const joinSession = async (sessionId: string, userId: string) => {
-  return await Session.findByIdAndUpdate(
-    sessionId,
-    { $addToSet: { connectedUsers: userId } }, // avoid duplicates
-    { new: true }
-  ).populate("activeSong connectedUsers");
-};
+// export const joinSession = async (sessionId: string, userId: string) => {
+//   return await Session.findByIdAndUpdate(
+//     sessionId,
+//     { $addToSet: { connectedUsers: userId } }, // avoid duplicates
+//     { new: true }
+//   ).populate("activeSong connectedUsers");
+// };
 
 export const setActiveSong = async (sessionId: string, songId: string) => {
   const session = await Session.findById(sessionId);

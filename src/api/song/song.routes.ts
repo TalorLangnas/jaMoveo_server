@@ -3,7 +3,10 @@ import { searchSongs, getSongById } from "./song.controller.js";
 
 const router = Router();
 
-router.get("/search", searchSongs);         // ?q=hey
-router.get("/:id", getSongById);           // get song data
+// Search for a song by its title or query
+router.get("/search", searchSongs);
+
+// Get a song by its ID (title or unique identifier)
+router.get("/:id", getSongById);
 
 export default router;

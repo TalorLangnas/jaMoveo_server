@@ -2,23 +2,24 @@ import mongoose, { Schema, Document, Types } from "mongoose";
 
 // Define a TypeScript interface for the Session document
 export interface ISession extends Document {
+  _id: Types.ObjectId;  // Explicitly define _id as ObjectId
   admin: Types.ObjectId;
-  activeSong: Types.ObjectId | null;
-  connectedUsers: Types.ObjectId[];
-  songHistory: Types.ObjectId[];
+  activeSong: any | null;  // Allow activeSong to hold raw song data (optional)
+  connectedUsers: Types.ObjectId[];  // Store connected users (player references)
+  songHistory: any[];  // Store song data directly here (optional)
   isActive: boolean;
-  sessionUrl: string; // Store the generated URL
+  sessionUrl: string;
   createdAt: Date;
 }
 
 // Define the schema
 const sessionSchema = new Schema<ISession>({
   admin: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  activeSong: { type: Schema.Types.ObjectId, ref: "Song", default: null },
-  connectedUsers: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  songHistory: [{ type: Schema.Types.ObjectId, ref: "Song" }],
+  activeSong: { type: Schema.Types.Mixed, default: null },  // Store raw song data (optional)
+  connectedUsers: [{ type: Schema.Types.ObjectId, ref: "User" }],  // Store connected players (users)
+  songHistory: [{ type: Schema.Types.Mixed }],  // Store raw song data (optional)
   isActive: { type: Boolean, default: true },
-  sessionUrl: { type: String }, // Store the generated URL
+  sessionUrl: { type: String }, // Store the generated session URL
   createdAt: { type: Date, default: Date.now }
 });
 

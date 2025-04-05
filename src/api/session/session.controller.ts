@@ -1,76 +1,52 @@
 import { Request, Response } from "express";
 import {
   createSession,
-  // joinSession,
   setActiveSong,
-  quitSession,
-  getCurrentSession
+  getCurrentSession,
+  disconnectUser 
 } from "./session.service.js";
 import User from "../../models/user.model.js";
+import Session from "../../models/session.model.js"; 
 import { verifyToken } from "../../middlewares/auth.middleware.js"; 
 
 
 export const createSessionController = async (req: Request, res: Response): Promise<void> => {
   try {
-    const adminId = (req as any).user.id;  // Get admin's user ID from request
-    const session = await createSession(adminId);  // Create session and save it to DB
-    res.status(201).json(session);  // Return the session object (sessionUrl is already in the session object)
+    const adminId = (req as any).user.id;  
+    const session = await createSession(adminId);  
+    res.status(201).json(session);  
   } catch (err) {
     res.status(400).json({ error: (err as Error).message });
   }
 };
 
 export const joinSessionController = async (req: Request, res: Response): Promise<void> => {
-  const sessionUrl = req.body.sessionUrl; // The session URL provided by the player
-  const sessionId = req.params.id; // The session ID from the URL (this should match the session URL)
-  const userId = (req as any).user.id; // Get user ID from the token
+  const sessionId = req.params.id;
+  const userId = (req as any).user.id;
 
   try {
-    // Fetch the session based on the session ID
-    const session = await getCurrentSession(sessionId);
+    // Fetch the session
+    const session = await Session.findById(sessionId);
     
-    // Check if the session exists and is active
     if (!session) {
       res.status(404).json({ message: "Session not found" });
       return;
     }
 
-    if (!session.isActive) {
-      res.status(400).json({ message: "Session is no longer active" });
-      return;
-    }
-
-    // If the session URL doesn't match, return an error
-    if (session.sessionUrl !== sessionUrl) {
-      res.status(400).json({ message: "Invalid session URL" });
-      return;
-    }
-
-    // Check if the user is signed up (verify if the user exists)
-    const user = await User.findById(userId); // Assuming the user is authenticated by token
-    if (!user) {
-      // If the user is not found, return an error and suggest going to the signup page
-      res.status(401).json({ message: "User not signed up. Please sign up to join." });
-      return;
-    }
-
-    // Add the user to the session (if not already in the session)
+    // Ensure the user is not already in the session's connected users
     if (!session.connectedUsers.includes(userId)) {
       session.connectedUsers.push(userId);
-      await session.save(); // Save the session with the new connected user
+      await session.save();
+
+      // Update the user's sessionId field to match the session _id
+      const user = await User.findById(userId);
+      if (user) {
+        user.sessionId = session._id;
+        await user.save();
+      }
     }
 
-    // Respond with the session data and user details to navigate to the main page
-    res.json({
-      message: "Joined the session successfully!",
-      session,
-      user: {
-        id: user._id,
-        username: user.username,
-        role: user.role,
-        instrument: user.instrument,
-      },
-    });
+    res.json({ message: "Joined the session successfully!", session });
   } catch (err) {
     res.status(500).json({ error: (err as Error).message });
   }
@@ -86,12 +62,18 @@ export const setActiveSongController = async (req: Request, res: Response) => {
   }
 };
 
-export const quitSessionController = async (req: Request, res: Response) => {
+export const disconnectSessionController = async (req: Request, res: Response): Promise<void> => {
+  const userSessionId = req.body.sessionId;  // Extract the sessionId from the request body
+  const userId = (req as any).user.id;  // Get the user ID from the token
+
   try {
-    const session = await quitSession(req.params.id);
-    res.json(session);
+    // Call the disconnectUser function to handle the logic
+    const result = await disconnectUser(userSessionId, userId);
+
+    // Send the result back to the client
+    res.status(200).json(result);
   } catch (err) {
-    res.status(400).json({ error: (err as Error).message });
+    res.status(500).json({ error: (err as Error).message });
   }
 };
 

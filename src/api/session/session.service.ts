@@ -20,6 +20,13 @@ export const createSession = async (adminId: string): Promise<ISession> => {
   // Save the session again after assigning the sessionUrl
   await session.save();
 
+  // Update the admin's sessionId with the session._id value
+  const admin = await User.findById(adminId);
+  if (admin) {
+    admin.sessionId = session._id;  // Set admin's sessionId to the session's _id
+    await admin.save();  // Save the updated admin document
+  }
+
   return session;  // Return the session object with sessionUrl included (correctly generated)
 };
 
@@ -52,11 +59,48 @@ export const getCurrentSession = async (sessionId: string): Promise<ISession | n
     .exec();  // Explicitly call .exec() for more control over the query
 };
 
-export const quitSession = async (sessionId: string) => {
-  return await Session.findByIdAndUpdate(
-    sessionId,
-    { isActive: false, connectedUsers: [], activeSong: null },
-    { new: true }
-  );
-};
+export const disconnectUser = async (userSessionId: string, userId: string) => {
+  const session = await Session.findById(userSessionId);
+  if (!session) throw new Error("Session not found");
 
+  const user = await User.findById(userId);
+  if (!user) throw new Error("User not found");
+
+  const userObjectId = new mongoose.Types.ObjectId(userId); // Convert userId to ObjectId
+
+  // Handle player disconnection
+  if (user.role === "player") {
+    if (!session.connectedUsers.includes(userObjectId)) throw new Error("User is not in the session");
+    
+    // Remove player from the connectedUsers and update session
+    session.connectedUsers = session.connectedUsers.filter(id => !id.equals(userObjectId));
+    await session.save();
+
+    user.sessionId = 0;
+    await user.save();
+    return { message: "Player successfully disconnected from the session", session };
+  }
+
+  // Handle admin disconnection
+  if (user.role === "admin") {
+    session.isActive = false;
+    await session.save(); // Deactivate session first
+
+    // Remove all players from the connectedUsers list and reset their sessionId
+    for (const connectedUserId of session.connectedUsers) {
+      const connectedUser = await User.findById(connectedUserId);
+      if (connectedUser) {
+        connectedUser.sessionId = 0;
+        await connectedUser.save();
+      }
+    }
+
+    await session.deleteOne(); // Delete the session from DB
+
+    user.sessionId = 0;
+    await user.save();
+    return { message: "Admin successfully disconnected. Session is finished.", session };
+  }
+
+  throw new Error("Invalid user role");
+};

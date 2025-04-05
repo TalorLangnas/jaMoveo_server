@@ -6,8 +6,9 @@ import {
   quitSession,
   getCurrentSession
 } from "./session.service.js";
-import { loadSongs } from "../../services/song.service.js";
-import { scrapeSongFromTab4U } from "../../services/songScraper.js"; 
+import User from "../../models/user.model.js";
+import { verifyToken } from "../../middlewares/auth.middleware.js"; 
+
 
 export const createSessionController = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -20,39 +21,56 @@ export const createSessionController = async (req: Request, res: Response): Prom
 };
 
 export const joinSessionController = async (req: Request, res: Response): Promise<void> => {
-  const sessionId = req.params.id; // Get session ID from URL
-  const sessionUrl = req.body.sessionUrl; // Player needs to send the session URL when they try to join
-  
+  const sessionUrl = req.body.sessionUrl; // The session URL provided by the player
+  const sessionId = req.params.id; // The session ID from the URL (this should match the session URL)
+  const userId = (req as any).user.id; // Get user ID from the token
+
   try {
-    // Fetch the session
+    // Fetch the session based on the session ID
     const session = await getCurrentSession(sessionId);
     
+    // Check if the session exists and is active
     if (!session) {
       res.status(404).json({ message: "Session not found" });
       return;
     }
 
-    // Check if the session URL matches the one sent by the admin
+    if (!session.isActive) {
+      res.status(400).json({ message: "Session is no longer active" });
+      return;
+    }
+
+    // If the session URL doesn't match, return an error
     if (session.sessionUrl !== sessionUrl) {
       res.status(400).json({ message: "Invalid session URL" });
       return;
     }
 
-    // Players can join regardless of the active song status, so we don't need to check it.
-    // Just add the player to the session's connectedUsers.
-    // You can also add any relevant logic like player status, but for now, we just add them.
-
-    // Proceed to add the player to the connected users list (assuming verifyToken checks user authenticity)
-    const userId = (req as any).user.id; // Get player’s user ID from the token
-
-    // Add player to the connected users list (avoiding duplicates)
-    if (!session.connectedUsers.includes(userId)) {
-      session.connectedUsers.push(userId);
-      await session.save();
+    // Check if the user is signed up (verify if the user exists)
+    const user = await User.findById(userId); // Assuming the user is authenticated by token
+    if (!user) {
+      // If the user is not found, return an error and suggest going to the signup page
+      res.status(401).json({ message: "User not signed up. Please sign up to join." });
+      return;
     }
 
-    // Respond with the session data
-    res.json({ message: "Joined the session!", session });
+    // Add the user to the session (if not already in the session)
+    if (!session.connectedUsers.includes(userId)) {
+      session.connectedUsers.push(userId);
+      await session.save(); // Save the session with the new connected user
+    }
+
+    // Respond with the session data and user details to navigate to the main page
+    res.json({
+      message: "Joined the session successfully!",
+      session,
+      user: {
+        id: user._id,
+        username: user.username,
+        role: user.role,
+        instrument: user.instrument,
+      },
+    });
   } catch (err) {
     res.status(500).json({ error: (err as Error).message });
   }

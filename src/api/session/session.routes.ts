@@ -5,7 +5,6 @@ import {
   joinSessionController,
   setActiveSongController,
   quitSessionController,
-  getCurrentSessionController
 } from "./session.controller.js";
 
 const router = Router();
@@ -17,6 +16,5 @@ router.post("/:id/quit", verifyToken, requireAdmin, quitSessionController);
 
 // ✅ All signed-in users can join and view session
 router.post("/:id/join", verifyToken, joinSessionController);
-router.get("/:id", verifyToken, getCurrentSessionController);
 
 export default router;

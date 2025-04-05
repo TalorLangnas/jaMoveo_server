@@ -26,6 +26,9 @@ export const loginUser = async (username: string, password: string) => {
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) throw new Error("Invalid username or password");
 
+  // Create the token, include user role along with user id
   const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: "1h" });
-  return token;
+  
+  // Return both token and role
+  return { token, role: user.role };
 };

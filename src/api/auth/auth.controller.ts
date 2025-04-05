@@ -28,8 +28,8 @@ export const signupAdmin = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
-    const token = await loginUser(username, password);
-    res.status(200).json({ token });
+    const { token, role } = await loginUser(username, password); // Destructure the return value
+    res.status(200).json({ token, role }); // Send both token and role in the response
   } catch (err) {
     if (err instanceof Error) {
       res.status(401).json({ error: err.message });

@@ -15,7 +15,7 @@ export const createSession = async (adminId: string): Promise<ISession> => {
   await session.save(); // Save the session to the database, Mongoose will generate _id
 
   // Now that the session is saved, use session._id to generate sessionUrl
-  session.sessionUrl = `${baseUrl}/session/${session._id.toString()}`;
+  session.sessionUrl = `${baseUrl}/api/session/${session._id.toString()}`;
 
   // Save the session again after assigning the sessionUrl
   await session.save();
@@ -60,10 +60,3 @@ export const quitSession = async (sessionId: string) => {
   );
 };
 
-// export const getCurrentSession = async (sessionId: string) => {
-//   return await Session.findById(sessionId)
-//     .populate("admin", "username")
-//     .populate("activeSong")
-//     .populate("connectedUsers", "username instrument")
-//     .populate("songHistory");
-// };

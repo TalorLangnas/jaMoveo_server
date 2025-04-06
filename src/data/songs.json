@@ -1,0 +1,37 @@
+[
+    {
+      "name": "Hey Jude",
+      "artist": "The Beatles",
+      "body": [
+        [
+          { "lyrics": "Hey" },
+          { "lyrics": "Jude", "chords": "F" },
+          { "lyrics": "don't" },
+          { "lyrics": "make" },
+          { "lyrics": "it" },
+          { "lyrics": "bad", "chords": "C" }
+        ],
+        [
+          { "lyrics": "Take" },
+          { "lyrics": "a" },
+          { "lyrics": "sad", "chords": "C7" },
+          { "lyrics": "song", "chords": "C4/7" },
+          { "lyrics": "and" },
+          { "lyrics": "make" },
+          { "lyrics": "it" },
+          { "lyrics": "better", "chords": "F" }
+        ]
+      ]
+    },
+    {
+      "name": "Another Song",
+      "artist": "Some Artist",
+      "body": [
+        [
+          { "lyrics": "Line 1" },
+          { "lyrics": "Line 2", "chords": "G" }
+        ]
+      ]
+    }
+  ]
+  

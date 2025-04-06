@@ -9,7 +9,7 @@ export interface ISession extends Document {
   isActive: boolean;
   sessionUrl: string;
   createdAt: Date;
-}
+} 
 
 const sessionSchema = new Schema<ISession>({
   admin: { type: Schema.Types.ObjectId, ref: "User", required: true },

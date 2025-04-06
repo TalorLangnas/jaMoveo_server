@@ -1,20 +1,23 @@
 import { Request, Response } from "express";
 import {
   createSession,
-  setActiveSong,
   getCurrentSession,
   disconnectUser 
 } from "./session.service.js";
 import User from "../../models/user.model.js";
 import Session from "../../models/session.model.js"; 
-import { verifyToken } from "../../middlewares/auth.middleware.js"; 
 
 
 export const createSessionController = async (req: Request, res: Response): Promise<void> => {
   try {
     const adminId = (req as any).user.id;  
-    const session = await createSession(adminId);  
-    res.status(201).json(session);  
+    const session = await createSession(adminId);
+    if (!session) {
+      console.log("Admin already has an active session.");
+      res.status(400).json({ message: "Session already exists" });
+    } else {
+      res.status(201).json(session); 
+    } 
   } catch (err) {
     res.status(400).json({ error: (err as Error).message });
   }
@@ -49,16 +52,6 @@ export const joinSessionController = async (req: Request, res: Response): Promis
     res.json({ message: "Joined the session successfully!", session });
   } catch (err) {
     res.status(500).json({ error: (err as Error).message });
-  }
-};
-
-export const setActiveSongController = async (req: Request, res: Response) => {
-  try {
-    const { songTitle } = req.body; // Assuming songTitle is passed in the body
-    const session = await setActiveSong(req.params.id, songTitle);
-    res.json(session);
-  } catch (err) {
-    res.status(400).json({ error: (err as Error).message });
   }
 };
 

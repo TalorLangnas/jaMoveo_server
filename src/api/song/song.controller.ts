@@ -1,40 +1,50 @@
-import { Request, Response } from "express";
-import { scrapeSongFromTab4U } from "../../services/songScraper.js"; // Import the scraping function
+// src/api/song/song.controller.ts
 
-// Search songs by query (you can adjust this if needed to match search functionality)
-export const searchSongs = async (req: Request, res: Response) => {
-  const { q } = req.query;
+import { Request, Response } from "express";
+import { addSongService, searchSongService } from "../song/song.service";  
+import { importSongsService } from "../song/song.service";
+
+// Controller for adding a song
+export const addSongController = async (req: Request, res: Response) => {
+  const { name, artist, body } = req.body;
 
   try {
-    // For simplicity, we'll scrape the song using the search query (adjust as needed)
-    // If you want to use scraping based on a query, you can implement a scraping mechanism for it
-    const songUrl = `https://www.tab4u.com/song/${q}`;  // Assuming search by song title
-    const song = await scrapeSongFromTab4U(songUrl);  // Scrape the song data
-
-    if (!song) {
-      res.status(404).json({ message: "Song not found" });
-      return;
-    }
-
-    res.json(song); // Return the scraped song data
+    // Call the service function to add the song
+    const newSong = await addSongService(name, artist, body);
+    res.status(201).json(newSong);  // Return the created song
   } catch (err) {
-    res.status(500).json({ error: (err as Error).message });
+    res.status(500).json({ error: "Failed to add song." });
   }
 };
 
-// Get a song by ID (Here, ID could be the song title or another identifier)
-export const getSongById = async (req: Request, res: Response): Promise<void> => {
+// Controller for searching a song by name
+export const searchSongController = async (req: Request, res: Response): Promise<void> => {
+  
+  const songName = req.query.name as string;  // Retrieve song name from the query parameter 'name'
+  console.log("req.query.name is:", songName);  //debugging line
   try {
-    const songUrl = `https://www.tab4u.com/song/${req.params.id}`;  // Assuming the song ID is the title or unique ID in URL
-    const song = await scrapeSongFromTab4U(songUrl);  // Scrape the song data
-
+    console.log("enter to searchSongController");  //debugging line
+    // Call the service function to search for the song
+    const song = await searchSongService(songName);
     if (!song) {
-      res.status(404).json({ message: "Song not found" });
-      return;
+      res.status(404).json({ error: "Song not found" });
     }
-
-    res.json(song); // Return the scraped song data
+    res.json(song);  // Return the found song
   } catch (err) {
-    res.status(500).json({ error: (err as Error).message });
+    res.status(500).json({ error: "Server error while searching for the song" });
+  }
+};
+
+
+export const importSongsController = async (req: Request, res: Response): Promise<void> => {
+  try {
+    console.log("enter to importSongsController");  //debugging line
+    const result = await importSongsService();
+      res.status(201).json({
+      message: "Songs imported successfully",
+      songs: result
+    });
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
   }
 };

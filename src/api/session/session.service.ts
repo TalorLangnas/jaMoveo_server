@@ -1,9 +1,16 @@
 import mongoose from "mongoose";
 import Session, { ISession } from "../../models/session.model.js";
-import { loadSongs } from "../../services/song.service.js";
 import User from "../../models/user.model.js";
 
-export const createSession = async (adminId: string): Promise<ISession> => {
+export const createSession = async (adminId: string): Promise<ISession | null> => {
+
+  const existingSession = await Session.findOne({ admin: adminId, isActive: true });
+
+  if (existingSession) {
+    
+    return null;
+  }
+
   const isLocal = process.env.NODE_ENV === "development";  // Check if in development
   const baseUrl = isLocal ? "http://localhost:5000" : process.env.BASE_URL; // Use environment variable for production URL
 
@@ -28,28 +35,6 @@ export const createSession = async (adminId: string): Promise<ISession> => {
   }
 
   return session;  // Return the session object with sessionUrl included (correctly generated)
-};
-
-export const setActiveSong = async (sessionId: string, songTitle: string) => {
-  const session = await Session.findById(sessionId);
-  if (!session) throw new Error("Session not found");
-
-  // Load the songs from the local files
-  const songs = await loadSongs();
-
-  // Find the song by title
-  const song = songs.find(song => song.title.toLowerCase() === songTitle.toLowerCase());
-
-  if (!song) throw new Error("Song not found");
-
-  // If there's an active song, add it to the song history
-  if (session.activeSong) {
-    session.songHistory.push(session.activeSong);
-  }
-
-  // Set the active song
-  session.activeSong = song; // Store the song object itself
-  return await session.save();
 };
 
 export const getCurrentSession = async (sessionId: string): Promise<ISession | null> => {

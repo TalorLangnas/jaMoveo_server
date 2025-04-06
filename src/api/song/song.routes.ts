@@ -6,7 +6,7 @@ import { verifyToken, requireAdmin } from "../../middlewares/auth.middleware.js"
 
 const router = Router();
 
-router.get('/song/search', verifyToken, requireAdmin,  searchSongController);
+router.get('/song/search', verifyToken, requireAdmin, searchSongController);
 
 router.post('/song/add', verifyToken, requireAdmin,  addSongController);
 

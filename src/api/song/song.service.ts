@@ -37,7 +37,8 @@ export const searchSongService = async (name: string) => {
     console.log("song is:", song);  //debugging line
     return song;  
   } catch (err) {
-
+    // write error message:
+    console.error("Error occurred on searchSongService:", err);  //debugging line
     throw new Error("Error occurred while searching for the song.");
   }
 };

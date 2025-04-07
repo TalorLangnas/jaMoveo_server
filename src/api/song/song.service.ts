@@ -33,8 +33,7 @@ export const addSongService = async (name: string, artist: string, body: any[]) 
 export const searchSongService = async (name: string) => {
   console.log("enter to searchSongService");  //debugging line
   try {
-    const song = await Song.findOne({ name });
-    console.log("song is:", song);  //debugging line
+    const song = await Song.findOne({ name });    
     return song;  
   } catch (err) {
     // write error message:

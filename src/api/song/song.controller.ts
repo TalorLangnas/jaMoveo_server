@@ -33,6 +33,7 @@ export const searchSongController = async (req: Request, res: Response): Promise
   } catch (err) {
     res.status(500).json({ error: "Server error while searching for the song" });
   }
+  
 };
 
 
@@ -48,3 +49,4 @@ export const importSongsController = async (req: Request, res: Response): Promis
     res.status(500).json({ error: error.message });
   }
 };
+

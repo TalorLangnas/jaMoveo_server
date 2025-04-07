@@ -4,6 +4,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import Song, { ISong } from "../../models/song.model.js";  // Importing the Song model
 import { fileURLToPath } from 'url';
+import { Types } from 'mongoose';
 import { dirname, join } from 'path';
 
 // Define __dirname in an ES module environment
@@ -33,10 +34,16 @@ export const addSongService = async (name: string, artist: string, body: any[]) 
 export const searchSongService = async (name: string) => {
   console.log("enter to searchSongService");  //debugging line
   try {
-    const song = await Song.findOne({ name });    
-    return song;  
+    const song = await Song.findOne({ name });
+
+    console.log("song is:", song);  //debugging line   
+
+    if (!song) {
+      throw new Error("Song not found.");
+    }
+
+    return (song._id as Types.ObjectId).toString();  // assuming Mongoose _id
   } catch (err) {
-    // write error message:
     console.error("Error occurred on searchSongService:", err);  //debugging line
     throw new Error("Error occurred while searching for the song.");
   }

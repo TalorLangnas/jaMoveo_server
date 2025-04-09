@@ -38,6 +38,7 @@ export const joinSessionController = async (req: Request, res: Response): Promis
 
     // Ensure the user is not already in the session's connected users
     if (!session.connectedUsers.includes(userId)) {
+      
       session.connectedUsers.push(userId);
       await session.save();
 

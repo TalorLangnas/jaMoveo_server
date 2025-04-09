@@ -11,24 +11,20 @@ import { dirname, join } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Function to add a new song to the database
-export const addSongService = async (name: string, artist: string, body: any[]) => {
+
+export const findSongById = async (id: string) => {
+  console.log("enter to findSongById");  //debugging line
+  console.log("id is:", id);  //debugging line
   try {
-    // Create a new song using the provided data
-    const newSong = new Song({
-      name,
-      artist,
-      body
-    });
-
-    // Save the new song to the database
-    await newSong.save();
-
-    return newSong;  // Return the saved song
-  } catch (err) {
-    throw new Error("Error occurred while adding the song.");
+    // Use Mongoose's findById method to get the song
+    const song = await Song.findById(id);
+    console.log("song is:", song);  //debugging line
+    return song;
+  } catch (error) {
+    throw error; // Propagate the error to be handled by the controller
   }
 };
+
 
 // Function to search for a song by name
 export const searchSongService = async (name: string) => {
@@ -65,5 +61,24 @@ export const importSongsService = async () => {
     throw new Error(`Error importing songs: ${error}`);
   }
 };
+
+// Function to add a new song to the database
+// export const addSongService = async (name: string, artist: string, body: any[]) => {
+//   try {
+//     // Create a new song using the provided data
+//     const newSong = new Song({
+//       name,
+//       artist,
+//       body
+//     });
+
+//     // Save the new song to the database
+//     await newSong.save();
+
+//     return newSong;  // Return the saved song
+//   } catch (err) {
+//     throw new Error("Error occurred while adding the song.");
+//   }
+// };
 
 

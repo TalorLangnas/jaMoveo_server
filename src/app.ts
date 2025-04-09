@@ -13,6 +13,6 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/session", sessionRoutes);
-app.use("/api", songRoutes);
+app.use("/api/song", songRoutes);
 
 export default app;

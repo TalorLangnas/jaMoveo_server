@@ -1,6 +1,7 @@
 // src/services/socketIo.ts
 import { Server, Socket } from 'socket.io';
 import http from 'http';
+import { findSongById } from '../api/song/song.service.js'; // Import the findSongById function
 
 // Export a function that initializes Socket.IO with the given server.
 export function initSocket(server: http.Server): void {
@@ -38,5 +39,35 @@ export function initSocket(server: http.Server): void {
       console.log('Client disconnected:', socket.id);
       // Optionally: check if a disconnected client was the admin and broadcast a session end.
     });
+
+    // Example: When a client sends a "custom_event",
+    // broadcast it to all other clients in the same room.
+    socket.on('custom_event', (data: { sessionId: string; message: string }) => {
+      console.log(`Received custom_event from socket ${socket.id} with data:`, data);
+
+      // Use socket.broadcast.to(...) to send to everyone in the room except the sender.
+      socket.broadcast.to(data.sessionId).emit('custom_event', data);
+    });
+
+    socket.on('start_song', async (data: { songId: string; sessionId: string }) => {
+      console.log("Received start_song event with data:", data);
+      try {
+        // Retrieve the song using findSongById function
+        const song = await findSongById(data.songId);
+        console.log("Song found:", song); // Debugging line
+        if (song) {
+          console.log("Found song:", song);
+          // Emit to all clients in the room (including the sender) the song information.
+          io.to(data.sessionId).emit('start_song', { song });
+          console.log(`Emitted start_song event to room ${data.sessionId}`);
+        } else {
+          console.error(`No song found for id: ${data.songId}`);
+        }
+      } catch (error) {
+        console.error("Error in start_song event:", error);
+      }
+    })
+
   });
+  
 }

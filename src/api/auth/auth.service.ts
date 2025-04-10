@@ -30,5 +30,6 @@ export const loginUser = async (username: string, password: string) => {
   const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: "1h" });
   
   // Return both token and role
-  return { token, role: user.role, userId: user._id };
+  console.log("instrument is:", user.instrument); // Debugging line
+  return { token, role: user.role, userId: user._id, instrument: user.instrument };
 };

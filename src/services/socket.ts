@@ -16,21 +16,14 @@ export function initSocket(server: http.Server): void {
     console.log('A client connected: ' + socket.id);
 
     // Listen for start_session event (triggered by admin)
-    socket.on('start_session', (data: { sessionId: string; adminId?: string; song?: any }) => {
-      console.log('Session started by admin:', data);
+    socket.on('join_session', (data: { sessionId: string, userId?: string }) => {
+      console.log('Session started by admin:', data.sessionId);
+      console.log(`User ID: ${data.userId} joining session ${data.sessionId}`); // Debugging line
+      console.log(socket.rooms, socket.rooms); // debugging line
       // Have the socket join the room (which creates it if it doesn't exist)
       socket.join(data.sessionId);
       // Notify everyone in the room that the session has started
-      io.to(data.sessionId).emit('session_started', data);
-    });
-  
-    // Listen for join_session event (triggered by players)
-    socket.on('join_session', (data: { sessionId: string; userId: string }) => {
-      console.log('Client joining session:', data);
-      // Join the room for the session
-      socket.join(data.sessionId);
-      // Optionally notify others in the session about the new joiner
-      io.to(data.sessionId).emit('user_joined', { userId: data.userId, socketId: socket.id });
+      io.to(data.sessionId).emit('user_joined', data);
     });
   
     // Listen for end_session event (triggered by admin)

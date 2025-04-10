@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import http from "http";
 import app from "./app.js"; // Ensure you're using .js for ESM if necessary
 import { connectDB } from "./config/db.js";
-import { initSocket } from "./services/socketIo.js"; // Import the initSocket function
+import { initSocket } from "./services/socket.js"; // Import the initSocket function
 
 dotenv.config();
 

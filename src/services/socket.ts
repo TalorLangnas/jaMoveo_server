@@ -68,6 +68,14 @@ export function initSocket(server: http.Server): void {
       }
     })
 
+    // New quit_event listener: broadcast "quit_event" to all clients in the room when one is received.
+    socket.on('quit_event', (data: { sessionId: string }) => {
+      console.log("Received quit_event from socket", socket.id, "with data:", data);
+      io.to(data.sessionId).emit('quit_event');
+      console.log(`Broadcasted quit_event to room ${data.sessionId}`);
+    });
+
+
   });
   
 }

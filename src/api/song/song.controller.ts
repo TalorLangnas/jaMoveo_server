@@ -1,7 +1,7 @@
 // src/api/song/song.controller.ts
 
 import { Request, Response } from "express";
-import { searchSongService, findSongById, importSongsService } from "../song/song.service";  
+import { searchSongsService, findSongById, importSongsService } from "../song/song.service";  
 import Song from "../../models/song.model"; 
 
 // Controller for searching a song by name
@@ -12,7 +12,7 @@ export const searchSongController = async (req: Request, res: Response): Promise
   try {
     console.log("enter to searchSongController");  //debugging line
     // Call the service function to search for the song
-    const song = await searchSongService(songName);
+    const song = await searchSongsService(songName);
     if (!song) {
       res.status(404).json({ error: "Song not found" });
     }

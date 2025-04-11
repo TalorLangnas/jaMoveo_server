@@ -27,7 +27,7 @@ export const findSongById = async (id: string) => {
 
 
 // Function to search for a song by name
-export const searchSongService = async (name: string) => {
+export const searchSongsService = async (name: string) => {
   console.log("enter to searchSongService");  //debugging line
   try {
     const song = await Song.findOne({ name });
@@ -44,12 +44,31 @@ export const searchSongService = async (name: string) => {
     throw new Error("Error occurred while searching for the song.");
   }
 };
+// export const searchSongsService = async (searchTerm: string): Promise<ISong[]> => {
+//   console.log("enter to searchSongsService with searchTerm:", searchTerm);
+//   try {
+//     // Use a regular expression to match songs by name that contain the search term.
+//     const songs = await Song.find({ 
+//       name: { $regex: searchTerm, $options: 'i' }  // 'i' makes it case-insensitive
+//     });
+
+//     console.log("songs found:", songs);
+//     if (!songs || songs.length === 0) {
+//       throw new Error("No songs found.");
+//     }
+
+//     return songs;
+//   } catch (err) {
+//     console.error("Error occurred on searchSongsService:", err);
+//     throw new Error("Error occurred while searching for the songs.");
+//   }
+// };
 
 export const importSongsService = async () => {
   try {
     console.log("enter to importSongsService");  //debugging line
     // Define the path to your JSON file (adjust the path as needed)
-    const filePath = path.join(__dirname, "..", "..", "data", "songs.json");
+    const filePath = path.join(__dirname, "..", "..", "public", "data", "tamid_eoav_eoti.json");
     // Read the file using fs/promises for async/await
     const data = await fs.readFile(filePath, 'utf8');
     // Parse JSON data; expect an array of Song objects
@@ -61,24 +80,3 @@ export const importSongsService = async () => {
     throw new Error(`Error importing songs: ${error}`);
   }
 };
-
-// Function to add a new song to the database
-// export const addSongService = async (name: string, artist: string, body: any[]) => {
-//   try {
-//     // Create a new song using the provided data
-//     const newSong = new Song({
-//       name,
-//       artist,
-//       body
-//     });
-
-//     // Save the new song to the database
-//     await newSong.save();
-
-//     return newSong;  // Return the saved song
-//   } catch (err) {
-//     throw new Error("Error occurred while adding the song.");
-//   }
-// };
-
-

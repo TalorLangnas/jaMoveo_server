@@ -15,6 +15,7 @@ export type ILine = ILineItem[];
 export interface ISong extends Document {
   name: string;
   artist: string;
+  imgUrl?: string;
   body: ILine[];  // Each line is an array of line items, and body is an array of these lines
 }
 
@@ -32,6 +33,7 @@ const songSchema: Schema = new Schema(
   {
     name: { type: String, required: true },
     artist: { type: String, required: true },
+    imgUrl: { type: String },
     // Body is an array of arrays of line items
     body: {
       type: [[lineItemSchema]],

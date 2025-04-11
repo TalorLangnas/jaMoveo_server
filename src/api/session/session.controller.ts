@@ -24,12 +24,13 @@ export const createSessionController = async (req: Request, res: Response): Prom
 };
 
 export const joinSessionController = async (req: Request, res: Response): Promise<void> => {
-  const sessionId = req.params.id;
+  console.log("entered joinSessionController"); // Log to check if the function is called
+  // const sessionId = req.params.id;
   const userId = (req as any).user.id;
-
   try {
     // Fetch the session
-    const session = await Session.findById(sessionId);
+    const session = await Session.findOne({});
+    // const session = await Session.findById(sessionId);
     
     if (!session) {
       res.status(404).json({ message: "Session not found" });

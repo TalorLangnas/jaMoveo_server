@@ -12,7 +12,7 @@ const router = Router();
 router.post("/", verifyToken, requireAdmin, createSessionController);
 
 // ✅ All signed-in users can join and view session
-router.post("/:id/join", verifyToken, joinSessionController);
+router.post("/join", verifyToken, joinSessionController);
 router.post("/:id/disconnect", verifyToken, disconnectSessionController);
 
 

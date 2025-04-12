@@ -11,7 +11,7 @@ let currSong: any = null; // Initialize song variable to null
 export function initSocket(server: http.Server): void {
   const io = new Server(server, {
     cors: {
-      connectionStateRecovery: {}, // Enable connection state recovery
+      connectionStateRecovery: {}, // Enable connection state recover
       origin: '*', // Adjust the origin to match your client URL in production
       methods: ['GET', 'POST']
     }

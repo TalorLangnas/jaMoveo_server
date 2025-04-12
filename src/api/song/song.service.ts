@@ -26,43 +26,27 @@ export const findSongById = async (id: string) => {
 };
 
 
-// Function to search for a song by name
-export const searchSongsService = async (name: string) => {
-  console.log("enter to searchSongService");  //debugging line
+export const searchSongsService = async (searchTerm: string): Promise<string[]> => {
+  console.log("enter to searchSongsService with searchTerm:", searchTerm);
   try {
-    const song = await Song.findOne({ name });
+    // Use a regular expression to match songs by name that contain the search term.
+    const songs = await Song.find({ 
+      name: { $regex: searchTerm, $options: 'i' }  // 'i' makes it case-insensitive
+    });
 
-    console.log("song is:", song);  //debugging line   
-
-    if (!song) {
-      throw new Error("Song not found.");
+    console.log("songs found:", songs);
+    if (!songs || songs.length === 0) {
+      throw new Error("No songs found.");
     }
 
-    return (song._id as Types.ObjectId).toString();  // assuming Mongoose _id
+    const songIds = songs.map((song) => (song._id as Types.ObjectId).toString());  // assuming Mongoose _id
+    console.log("songIds are:", songIds);  //debugging line
+    return songIds;
   } catch (err) {
-    console.error("Error occurred on searchSongService:", err);  //debugging line
-    throw new Error("Error occurred while searching for the song.");
+    console.error("Error occurred on searchSongsService:", err);
+    throw new Error("Error occurred while searching for the songs.");
   }
 };
-// export const searchSongsService = async (searchTerm: string): Promise<ISong[]> => {
-//   console.log("enter to searchSongsService with searchTerm:", searchTerm);
-//   try {
-//     // Use a regular expression to match songs by name that contain the search term.
-//     const songs = await Song.find({ 
-//       name: { $regex: searchTerm, $options: 'i' }  // 'i' makes it case-insensitive
-//     });
-
-//     console.log("songs found:", songs);
-//     if (!songs || songs.length === 0) {
-//       throw new Error("No songs found.");
-//     }
-
-//     return songs;
-//   } catch (err) {
-//     console.error("Error occurred on searchSongsService:", err);
-//     throw new Error("Error occurred while searching for the songs.");
-//   }
-// };
 
 export const importSongsService = async () => {
   try {

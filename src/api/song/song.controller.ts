@@ -3,8 +3,8 @@ import {
   searchSongsService,
   findSongById,
   importSongsService,
-} from "../song/song.service";
-import Song from "../../models/song.model";
+} from "../song/song.service.js";
+import Song from "../../models/song.model.js";
 
 export const searchSongController = async (
   req: Request,

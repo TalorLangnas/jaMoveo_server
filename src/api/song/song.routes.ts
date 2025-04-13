@@ -4,7 +4,7 @@ import {
   importSongsController,
   getSongDetailsController,
   getSongById,
-} from "./song.controller";
+} from "./song.controller.js";
 import {
   verifyToken,
   requireAdmin,

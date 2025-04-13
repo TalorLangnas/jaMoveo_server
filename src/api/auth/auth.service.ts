@@ -8,13 +8,18 @@ export const registerUser = async (
   username: string,
   password: string,
   instrument: string,
-  role: "player" | "admin" = "player" // 👈 optional role arg
+  role: "player" | "admin" = "player"
 ) => {
   const existingUser = await User.findOne({ username });
   if (existingUser) throw new Error("Username already exists");
 
   const hashedPassword = await bcrypt.hash(password, 10);
-  const user = new User({ username, password: hashedPassword, instrument, role });
+  const user = new User({
+    username,
+    password: hashedPassword,
+    instrument,
+    role,
+  });
   await user.save();
   return user;
 };
@@ -27,9 +32,14 @@ export const loginUser = async (username: string, password: string) => {
   if (!isMatch) throw new Error("Invalid username or password");
 
   // Create the token, include user role along with user id
-  const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: "1h" });
-  
-  // Return both token and role
-  console.log("instrument is:", user.instrument); // Debugging line
-  return { token, role: user.role, userId: user._id, instrument: user.instrument };
+  const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, {
+    expiresIn: "1h",
+  });
+
+  return {
+    token,
+    role: user.role,
+    userId: user._id,
+    instrument: user.instrument,
+  };
 };

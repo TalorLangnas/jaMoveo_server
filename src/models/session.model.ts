@@ -9,7 +9,7 @@ export interface ISession extends Document {
   isActive: boolean;
   sessionUrl: string;
   createdAt: Date;
-} 
+}
 
 const sessionSchema = new Schema<ISession>({
   admin: { type: Schema.Types.ObjectId, ref: "User", required: true },
@@ -18,7 +18,7 @@ const sessionSchema = new Schema<ISession>({
   songHistory: [{ type: Schema.Types.Mixed }],
   isActive: { type: Boolean, default: true },
   sessionUrl: { type: String },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
 });
 
 const Session = mongoose.model<ISession>("Session", sessionSchema);

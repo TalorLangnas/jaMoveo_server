@@ -8,10 +8,10 @@ import {
 
 const router = Router();
 
-// 🔒 Only admin can create, set songs, or quit session
+// Admin route
 router.post("/", verifyToken, requireAdmin, createSessionController);
 
-// ✅ All signed-in users can join and view session
+// User routes
 router.post("/join", verifyToken, joinSessionController);
 router.post("/:id/disconnect", verifyToken, disconnectSessionController);
 

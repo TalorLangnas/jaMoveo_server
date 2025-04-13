@@ -28,8 +28,11 @@ export const signupAdmin = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
-    const { token, role, userId, instrument } = await loginUser(username, password); // Destructure the return value
-    res.status(200).json({ token, role, userId, instrument }); // Send both token and role in the response
+    const { token, role, userId, instrument } = await loginUser(
+      username,
+      password
+    );
+    res.status(200).json({ token, role, userId, instrument });
   } catch (err) {
     if (err instanceof Error) {
       res.status(401).json({ error: err.message });

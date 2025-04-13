@@ -8,7 +8,6 @@ import userRoutes from "./api/user/user.routes.js";
 import sessionRoutes from "./api/session/session.routes.js";
 import songRoutes from "./api/song/song.routes.js";
 
-// Create __filename and __dirname from import.meta.url
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

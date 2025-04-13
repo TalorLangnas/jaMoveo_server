@@ -1,15 +1,20 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "ESNext",                       // ⬅️ ESModules instead of CommonJS
-    "moduleResolution": "Bundler",            // ⬅️ Important for ESM-style imports
-    "rootDir": "./",
+    "module": "ESNext",                      
+    "moduleResolution": "Bundler",           
+    "rootDir": "./src",
     "outDir": "./dist",
     "esModuleInterop": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
   },
   "include": [
-    "./api/**/*.ts"
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }

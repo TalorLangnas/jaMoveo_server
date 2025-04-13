@@ -3,7 +3,7 @@
     "target": "ES2020",
     "module": "ESNext",                       // ⬅️ ESModules instead of CommonJS
     "moduleResolution": "Bundler",            // ⬅️ Important for ESM-style imports
-    "rootDir": "./src",
+    "rootDir": "./",
     "outDir": "./dist",
     "esModuleInterop": true,
     "strict": true,

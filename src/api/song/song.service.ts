@@ -21,13 +21,10 @@ export const findSongById = async (id: string) => {
 export const searchSongsService = async (
   searchTerm: string
 ): Promise<string[]> => {
-  console.log("enter to searchSongsService with searchTerm:", searchTerm);
   try {
     const songs = await Song.find({
       name: { $regex: searchTerm, $options: "i" }, // 'i' makes it case-insensitive
     });
-
-    console.log("songs found:", songs);
     if (!songs || songs.length === 0) {
       throw new Error("No songs found.");
     }

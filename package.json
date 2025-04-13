@@ -1,12 +1,12 @@
 {
   "name": "jamoveo_server",
   "version": "1.0.0",
-  "main": "server.ts",
+  "main": "src/server.ts",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch server.ts",
-    "start": "tsx server.ts"
+    "dev": "tsx watch src/server.ts",
+    "start": "tsx src/server.ts"
   },
   "keywords": [],
   "author": "",

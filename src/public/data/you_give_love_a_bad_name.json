@@ -1,0 +1,277 @@
+[
+    {
+      "name": "You Give Love A Bad Name",
+      "artist": "Bon Jovi",
+      "imgUrl": "you_give_love_a_bad_name.jpg",
+      "body": [
+        [
+          { "lyrics": "Shot" },
+          { "lyrics": "through", "chords": "C" },
+          { "lyrics": "the" },
+          { "lyrics": "heart", "chords": "G" },
+          { "lyrics": "and" },
+          { "lyrics": "you're", "chords": "Am" },
+          { "lyrics": "to" },
+          { "lyrics": "blame", "chords": "F" }
+        ],
+        [
+          { "lyrics": "Darling," },
+          { "lyrics": "you", "chords": "C" },
+          { "lyrics": "give" },
+          { "lyrics": "love", "chords": "G" },
+          { "lyrics": "a" },
+          { "lyrics": "bad", "chords": "Am" },
+          { "lyrics": "name" }
+        ],
+        [
+          { "lyrics": "An" },
+          { "lyrics": "angel's", "chords": "C" },
+          { "lyrics": "smile" },
+          { "lyrics": "is", "chords": "G" },
+          { "lyrics": "what" },
+          { "lyrics": "you", "chords": "Am" },
+          { "lyrics": "sell" }
+        ],
+        [
+          { "lyrics": "You" },
+          { "lyrics": "promised", "chords": "C" },
+          { "lyrics": "me" },
+          { "lyrics": "heaven,", "chords": "G" },
+          { "lyrics": "then" },
+          { "lyrics": "put", "chords": "Am" },
+          { "lyrics": "me" },
+          { "lyrics": "through", "chords": "F" },
+          { "lyrics": "hell" }
+        ],
+        [
+          { "lyrics": "Chains" },
+          { "lyrics": "of", "chords": "C" },
+          { "lyrics": "love" },
+          { "lyrics": "got", "chords": "G" },
+          { "lyrics": "a" },
+          { "lyrics": "hold", "chords": "Am" },
+          { "lyrics": "on" },
+          { "lyrics": "me", "chords": "F" }
+        ],
+        [
+          { "lyrics": "When" },
+          { "lyrics": "passion's", "chords": "C" },
+          { "lyrics": "a" },
+          { "lyrics": "prison,", "chords": "G" },
+          { "lyrics": "you" },
+          { "lyrics": "can't", "chords": "Am" },
+          { "lyrics": "break" },
+          { "lyrics": "free", "chords": "F" }
+        ],
+        [
+          { "lyrics": "Whoa," },
+          { "lyrics": "you're", "chords": "C" },
+          { "lyrics": "a" },
+          { "lyrics": "loaded", "chords": "G" },
+          { "lyrics": "gun,", "chords": "Am" },
+          { "lyrics": "yeah" }
+        ],
+        [
+          { "lyrics": "Oh," },
+          { "lyrics": "there's", "chords": "C" },
+          { "lyrics": "nowhere" },
+          { "lyrics": "to", "chords": "G" },
+          { "lyrics": "run" }
+        ],
+        [
+          { "lyrics": "No" },
+          { "lyrics": "one", "chords": "C" },
+          { "lyrics": "can" },
+          { "lyrics": "save", "chords": "G" },
+          { "lyrics": "me," },
+          { "lyrics": "the", "chords": "Am" },
+          { "lyrics": "damage" },
+          { "lyrics": "is", "chords": "F" },
+          { "lyrics": "done" }
+        ],
+        [
+          { "lyrics": "Shot" },
+          { "lyrics": "through", "chords": "C" },
+          { "lyrics": "the" },
+          { "lyrics": "heart", "chords": "G" },
+          { "lyrics": "and" },
+          { "lyrics": "you're", "chords": "Am" },
+          { "lyrics": "to" },
+          { "lyrics": "blame", "chords": "F" }
+        ],
+        [
+          { "lyrics": "You" },
+          { "lyrics": "give", "chords": "C" },
+          { "lyrics": "love" },
+          { "lyrics": "a", "chords": "G" },
+          { "lyrics": "bad" },
+          { "lyrics": "name", "chords": "Am" },
+          { "lyrics": "(Bad" },
+          { "lyrics": "name)", "chords": "F" }
+        ],
+        [
+          { "lyrics": "I" },
+          { "lyrics": "play", "chords": "C" },
+          { "lyrics": "my" },
+          { "lyrics": "part", "chords": "G" },
+          { "lyrics": "and" },
+          { "lyrics": "you", "chords": "Am" },
+          { "lyrics": "play" },
+          { "lyrics": "your", "chords": "F" },
+          { "lyrics": "game" }
+        ],
+        [
+          { "lyrics": "You" },
+          { "lyrics": "give", "chords": "C" },
+          { "lyrics": "love" },
+          { "lyrics": "a", "chords": "G" },
+          { "lyrics": "bad" },
+          { "lyrics": "name", "chords": "Am" },
+          { "lyrics": "(Bad" },
+          { "lyrics": "name)", "chords": "F" }
+        ],
+        [
+          { "lyrics": "You" },
+          { "lyrics": "give", "chords": "C" },
+          { "lyrics": "love" },
+          { "lyrics": "a", "chords": "G" },
+          { "lyrics": "bad" },
+          { "lyrics": "name", "chords": "Am" }
+        ],
+        [
+          { "lyrics": "Paint" },
+          { "lyrics": "your", "chords": "C" },
+          { "lyrics": "smile" },
+          { "lyrics": "on", "chords": "G" },
+          { "lyrics": "your" },
+          { "lyrics": "lips", "chords": "Am" }
+        ],
+        [
+          { "lyrics": "Blood" },
+          { "lyrics": "red", "chords": "C" },
+          { "lyrics": "nails" },
+          { "lyrics": "on", "chords": "G" },
+          { "lyrics": "your" },
+          { "lyrics": "fingertips", "chords": "Am" }
+        ],
+        [
+          { "lyrics": "A" },
+          { "lyrics": "school", "chords": "C" },
+          { "lyrics": "boy's" },
+          { "lyrics": "dream,", "chords": "G" },
+          { "lyrics": "you" },
+          { "lyrics": "act", "chords": "Am" },
+          { "lyrics": "so" },
+          { "lyrics": "shy", "chords": "F" }
+        ],
+        [
+          { "lyrics": "Your" },
+          { "lyrics": "very", "chords": "C" },
+          { "lyrics": "first" },
+          { "lyrics": "kiss", "chords": "G" },
+          { "lyrics": "was" },
+          { "lyrics": "your", "chords": "Am" },
+          { "lyrics": "first" },
+          { "lyrics": "kiss", "chords": "F" },
+          { "lyrics": "goodbye" }
+        ],
+        [
+          { "lyrics": "Whoa," },
+          { "lyrics": "you're", "chords": "C" },
+          { "lyrics": "a" },
+          { "lyrics": "loaded", "chords": "G" },
+          { "lyrics": "gun" }
+        ],
+        [
+          { "lyrics": "Oh," },
+          { "lyrics": "there's", "chords": "C" },
+          { "lyrics": "nowhere" },
+          { "lyrics": "to", "chords": "G" },
+          { "lyrics": "run" }
+        ],
+        [
+          { "lyrics": "No" },
+          { "lyrics": "one", "chords": "C" },
+          { "lyrics": "can" },
+          { "lyrics": "save", "chords": "G" },
+          { "lyrics": "me," },
+          { "lyrics": "the", "chords": "Am" },
+          { "lyrics": "damage" },
+          { "lyrics": "is", "chords": "F" },
+          { "lyrics": "done" }
+        ],
+        [
+          { "lyrics": "Shot" },
+          { "lyrics": "through", "chords": "C" },
+          { "lyrics": "the" },
+          { "lyrics": "heart", "chords": "G" },
+          { "lyrics": "and" },
+          { "lyrics": "you're", "chords": "Am" },
+          { "lyrics": "to" },
+          { "lyrics": "blame", "chords": "F" }
+        ],
+        [
+          { "lyrics": "You" },
+          { "lyrics": "give", "chords": "C" },
+          { "lyrics": "love" },
+          { "lyrics": "a", "chords": "G" },
+          { "lyrics": "bad" },
+          { "lyrics": "name", "chords": "Am" },
+          { "lyrics": "(Bad" },
+          { "lyrics": "name)", "chords": "F" }
+        ],
+        [
+          { "lyrics": "I" },
+          { "lyrics": "play", "chords": "C" },
+          { "lyrics": "my" },
+          { "lyrics": "part", "chords": "G" },
+          { "lyrics": "and" },
+          { "lyrics": "you", "chords": "Am" },
+          { "lyrics": "play" },
+          { "lyrics": "your", "chords": "F" },
+          { "lyrics": "game" }
+        ],
+        [
+          { "lyrics": "You" },
+          { "lyrics": "give", "chords": "C" },
+          { "lyrics": "love" },
+          { "lyrics": "a", "chords": "G" },
+          { "lyrics": "bad" },
+          { "lyrics": "name", "chords": "Am" },
+          { "lyrics": "(Bad" },
+          { "lyrics": "name)", "chords": "F" }
+        ],
+        [
+          { "lyrics": "You" },
+          { "lyrics": "give", "chords": "C" },
+          { "lyrics": "love" },
+          { "lyrics": "a", "chords": "G" },
+          { "lyrics": "bad" },
+          { "lyrics": "name", "chords": "Am" }
+        ],
+        [
+          { "lyrics": "You" },
+          { "lyrics": "give", "chords": "C" },
+          { "lyrics": "love," },
+          { "lyrics": "bad", "chords": "G" },
+          { "lyrics": "name" }
+        ],
+        [
+          { "lyrics": "You" },
+          { "lyrics": "give", "chords": "C" },
+          { "lyrics": "love" },
+          { "lyrics": "a", "chords": "G" },
+          { "lyrics": "bad" },
+          { "lyrics": "name", "chords": "Am" }
+        ],
+        [
+          { "lyrics": "You" },
+          { "lyrics": "give", "chords": "C" },
+          { "lyrics": "love," },
+          { "lyrics": "bad", "chords": "G" },
+          { "lyrics": "name" }
+        ]
+      ]
+    }
+  ]
+  

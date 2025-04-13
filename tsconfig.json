@@ -1,20 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "ESNext",                      
-    "moduleResolution": "Bundler",           
-    "rootDir": "./src",
-    "outDir": "./dist",
+    "target": "ES2020",              // or another ECMAScript version that suits your project
+    "module": "ES2020",              // Update this to "ES2020", "esnext", or another allowed value
+    "moduleResolution": "node",
     "esModuleInterop": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src/**/*"]
 }

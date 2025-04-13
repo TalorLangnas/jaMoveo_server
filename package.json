@@ -21,6 +21,7 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.2",
+    "serverless-http": "^3.2.0",
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
@@ -28,11 +29,11 @@
     "@types/express": "^5.0.1",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/mongoose": "^5.11.96",
-    "@types/node": "^22.14.0",
+    "@types/node": "^22.14.1",
     "@types/socket.io": "^3.0.1",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "tsx": "^4.19.3",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   }
 }

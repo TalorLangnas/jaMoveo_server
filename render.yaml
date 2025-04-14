@@ -1,0 +1,12 @@
+services:
+  - type: web                # Tells Render this is a web service.
+    name: my-express-app     # A custom name for your service.
+    env: node                # Specifies the Node.js environment.
+    plan: free               # Choose your desired plan (free, starter, etc.).
+    buildCommand: npm install && npm run build
+    startCommand: npm start  # Ensure your package.json "start" script launches your app.
+    envVars:                # Environment variables for your service.
+      - key: MONGODB_URI        # The key for the environment variable.
+        value: mongodb+srv://tlangnas093:ET1kvCCfZD59aOWS@cluster0.om8z2ne.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0    # The value for the environment variable.
+      - key: PORT      
+        value: 5000

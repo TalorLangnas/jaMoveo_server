@@ -19,7 +19,7 @@ app.use("/api/auth", auth_routes_js_1.default);
 app.use("/api/users", user_routes_js_1.default);
 app.use("/api/session", session_routes_js_1.default);
 app.use("/api/song", song_routes_js_1.default);
-app.get('/**', (req, res) => {
+app.get(/.*/, (req, res) => {
     res.sendFile(path_1.default.join(__dirname, 'public', 'index.html'));
 });
 exports.default = app;

@@ -3,15 +3,13 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 import authRoutes from "./api/auth/auth.routes.js";
 import userRoutes from "./api/user/user.routes.js";
 import sessionRoutes from "./api/session/session.routes.js";
 import songRoutes from "./api/song/song.routes.js";
 
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(cors());

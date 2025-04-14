@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+import connectDB from "./config/db.js";
 
 import authRoutes from "./api/auth/auth.routes.js";
 import userRoutes from "./api/user/user.routes.js";
@@ -10,6 +11,8 @@ import songRoutes from "./api/song/song.routes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+await connectDB();
 
 const app = express();
 app.use(cors());

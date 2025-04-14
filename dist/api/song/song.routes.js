@@ -1,6 +1,10 @@
-import { Router } from "express";
-import { searchSongs, getSongById } from "./song.controller.js";
-const router = Router();
-router.get("/search", searchSongs);
-router.get("/:id", getSongById); // ✅ No error after TS fix
-export default router;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const song_controller_js_1 = require("./song.controller.js");
+const auth_middleware_js_1 = require("../../middlewares/auth.middleware.js");
+const router = (0, express_1.Router)();
+router.get("/search", auth_middleware_js_1.verifyToken, auth_middleware_js_1.requireAdmin, song_controller_js_1.searchSongController);
+router.get("/songId", auth_middleware_js_1.verifyToken, auth_middleware_js_1.requireAdmin, song_controller_js_1.getSongDetailsController);
+router.get("/:id", song_controller_js_1.getSongById);
+exports.default = router;

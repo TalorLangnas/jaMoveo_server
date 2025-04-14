@@ -1,23 +1,24 @@
-import { Server as SocketIOServer } from "socket.io";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getIO = exports.initSocket = void 0;
+const socket_io_1 = require("socket.io");
 let io;
-export const initSocket = (server) => {
-    io = new SocketIOServer(server, {
+const initSocket = (server) => {
+    io = new socket_io_1.Server(server, {
         cors: {
             origin: "*",
         },
     });
     io.on("connection", (socket) => {
-        console.log("🟢 Socket connected:", socket.id);
-        // Optional: add your socket listeners here
-        socket.on("disconnect", () => {
-            console.log("🔴 Socket disconnected:", socket.id);
-        });
+        socket.on("disconnect", () => { });
     });
     return io;
 };
-export const getIO = () => {
+exports.initSocket = initSocket;
+const getIO = () => {
     if (!io) {
         throw new Error("Socket.io not initialized!");
     }
     return io;
 };
+exports.getIO = getIO;

@@ -1,17 +1,20 @@
-import dotenv from "dotenv";
-import http from "http";
-import app from "./app.js"; // ✅ use .js extensions in ESM
-import { connectDB } from "./config/db.js";
-import { initSocket } from "./config/socket.js";
-dotenv.config();
-// Create HTTP server
-const server = http.createServer(app);
-// Initialize Socket.IO
-initSocket(server);
-// Connect DB and start server
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const dotenv_1 = __importDefault(require("dotenv"));
+const http_1 = __importDefault(require("http"));
+const app_js_1 = __importDefault(require("./app.js"));
+const db_js_1 = __importDefault(require("./config/db.js"));
+const socket_js_1 = require("./services/socket.js");
+dotenv_1.default.config();
+const server = http_1.default.createServer(app_js_1.default);
 const PORT = process.env.PORT || 5000;
-connectDB().then(() => {
+(0, db_js_1.default)().then(() => {
     server.listen(PORT, () => {
-        console.log(`🚀 Server listening on port ${PORT}`);
+        console.log(`Server listening on port ${PORT}`);
+        (0, socket_js_1.initSocket)(server);
     });
 });
+exports.default = server;

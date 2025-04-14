@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import {
   searchSongsService,
   findSongById,
-  importSongsService,
 } from "../song/song.service.js";
 import Song from "../../models/song.model.js";
 
@@ -21,22 +20,6 @@ export const searchSongController = async (
     res
       .status(500)
       .json({ error: "Server error while searching for the song" });
-  }
-};
-
-// Controller to add songs to the database
-export const importSongsController = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
-  try {
-    const result = await importSongsService();
-    res.status(201).json({
-      message: "Songs imported successfully",
-      songs: result,
-    });
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
   }
 };
 

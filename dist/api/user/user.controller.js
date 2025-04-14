@@ -1,31 +1,28 @@
-import { getAllUsers, getUserById } from "./user.service.js";
-export const getUsers = async (_req, res) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getUser = exports.getUsers = void 0;
+const user_service_js_1 = require("./user.service.js");
+const getUsers = async (_req, res) => {
     try {
-        const users = await getAllUsers();
+        const users = await (0, user_service_js_1.getAllUsers)();
         res.json(users);
     }
     catch (err) {
-        if (err instanceof Error) {
-            res.status(500).json({ error: err.message });
-        }
-        else {
-            res.status(500).json({ error: "An unknown error occurred" });
-        }
+        res.status(500).json({ error: err.message });
     }
 };
-export const getUser = async (req, res) => {
+exports.getUsers = getUsers;
+const getUser = async (req, res) => {
     try {
-        const user = await getUserById(req.params.id);
-        if (!user)
-            return res.status(404).json({ message: "User not found" });
+        const user = await (0, user_service_js_1.getUserById)(req.params.id);
+        if (!user) {
+            res.status(404).json({ message: "User not found" });
+            return;
+        }
         res.json(user);
     }
     catch (err) {
-        if (err instanceof Error) {
-            res.status(500).json({ error: err.message });
-        }
-        else {
-            res.status(500).json({ error: "An unknown error occurred" });
-        }
+        res.status(500).json({ error: err.message });
     }
 };
+exports.getUser = getUser;

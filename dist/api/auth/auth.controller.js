@@ -1,8 +1,11 @@
-import { loginUser, registerUser } from "./auth.service.js";
-export const signup = async (req, res) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.login = exports.signupAdmin = exports.signup = void 0;
+const auth_service_js_1 = require("./auth.service.js");
+const signup = async (req, res) => {
     try {
         const { username, password, instrument } = req.body;
-        const user = await registerUser(username, password, instrument);
+        const user = await (0, auth_service_js_1.registerUser)(username, password, instrument);
         res.status(201).json(user);
     }
     catch (err) {
@@ -14,21 +17,23 @@ export const signup = async (req, res) => {
         }
     }
 };
-export const signupAdmin = async (req, res) => {
+exports.signup = signup;
+const signupAdmin = async (req, res) => {
     try {
         const { username, password, instrument } = req.body;
-        const user = await registerUser(username, password, instrument, "admin");
+        const user = await (0, auth_service_js_1.registerUser)(username, password, instrument, "admin");
         res.status(201).json(user);
     }
     catch (err) {
         res.status(400).json({ error: err.message });
     }
 };
-export const login = async (req, res) => {
+exports.signupAdmin = signupAdmin;
+const login = async (req, res) => {
     try {
         const { username, password } = req.body;
-        const token = await loginUser(username, password);
-        res.status(200).json({ token });
+        const { token, role, userId, instrument } = await (0, auth_service_js_1.loginUser)(username, password);
+        res.status(200).json({ token, role, userId, instrument });
     }
     catch (err) {
         if (err instanceof Error) {
@@ -39,3 +44,4 @@ export const login = async (req, res) => {
         }
     }
 };
+exports.login = login;

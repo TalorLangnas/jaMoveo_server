@@ -1,10 +1,51 @@
-import mongoose from "mongoose";
-const songSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    artist: { type: String },
-    language: { type: String, enum: ["en", "he"], default: "en" },
-    data: { type: Array, required: true }, // lines of lyrics/chords
-    imageUrl: { type: String }
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
 });
-const Song = mongoose.model("Song", songSchema);
-export default Song;
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importStar(require("mongoose"));
+const lineItemSchema = new mongoose_1.Schema({
+    lyrics: { type: String },
+    chords: { type: String },
+}, { _id: false });
+const songSchema = new mongoose_1.Schema({
+    name: { type: String, required: true },
+    artist: { type: String, required: true },
+    imgUrl: { type: String },
+    body: {
+        type: [[lineItemSchema]],
+        required: true,
+    },
+});
+const Song = mongoose_1.default.model("Song", songSchema);
+exports.default = Song;

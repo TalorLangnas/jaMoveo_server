@@ -5,9 +5,6 @@ import { fileURLToPath } from "url";
 import { Types } from "mongoose";
 import { dirname, join } from "path";
 
-// // Define __dirname in an ES module environment
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
 
 export const findSongById = async (id: string) => {
   try {
@@ -37,22 +34,3 @@ export const searchSongsService = async (
     throw new Error("Error occurred while searching for the songs.");
   }
 };
-
-// export const importSongsService = async () => {
-//   try {
-//     const filePath = path.join(
-//       __dirname,
-//       "..",
-//       "..",
-//       "public",
-//       "data",
-//       "tamid_eoav_eoti.json"
-//     );
-//     const data = await fs.readFile(filePath, "utf8");
-//     const songs: ISong[] = JSON.parse(data);
-//     const result = await Song.insertMany(songs);
-//     return result;
-//   } catch (error) {
-//     throw new Error(`Error importing songs: ${error}`);
-//   }
-// };

@@ -59,7 +59,6 @@ Access the deployed app:
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** React, TypeScript, CSS Modules  
 - **Backend:** Node.js, Express, TypeScript, Socket.IO  
 - **Database:** MongoDB with Mongoose  
 - **Authentication:** JWT, bcrypt  

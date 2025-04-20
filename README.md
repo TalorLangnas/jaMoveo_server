@@ -4,7 +4,7 @@ This repository contains the **backend server** for **JaMoveo**,
 
 **JaMoveo** is a collaborative music rehearsal platform built for the Moveo band. Designed to run smoothly on mobile devices, it connects musicians in real time and allows them to participate in live sessions where lyrics and chords are shared instantly. Each band member logs in with their role and instrument, while an admin leads the session by selecting songs and controlling the flow. Whether you’re a guitarist, drummer, or singer—JaMoveo ensures everyone is on the same page, literally.  
 
-> 🔗 **Frontend repository:** [jaMove_client](https://github.com/TalorLangnas/jaMove_client)
+> 🔗 **Frontend repository:** [jaMove_client](https://github.com/TalorLangnas/jamoveo_client.git)
 
 ---
 

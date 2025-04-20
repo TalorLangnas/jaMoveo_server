@@ -1,24 +1,27 @@
-# 🎶 JaMoveo
+# 🎶 JaMoveo Server
 
-**JaMoveo** is a collaborative music rehearsal platform built for the Moveo band. Designed to run smoothly on mobile devices, it connects musicians in real time and allows them to participate in live sessions where lyrics and chords are shared instantly. Each band member logs in with their role and instrument, while an admin leads the session by selecting songs and controlling the flow. Whether you’re a guitarist, drummer, or singer—JaMoveo ensures everyone is on the same page, literally.
+This repository contains the **backend server** for **JaMoveo**,  
+
+**JaMoveo** is a collaborative music rehearsal platform built for the Moveo band. Designed to run smoothly on mobile devices, it connects musicians in real time and allows them to participate in live sessions where lyrics and chords are shared instantly. Each band member logs in with their role and instrument, while an admin leads the session by selecting songs and controlling the flow. Whether you’re a guitarist, drummer, or singer—JaMoveo ensures everyone is on the same page, literally.  
+
+> 🔗 **Frontend repository:** [jaMove_client](https://github.com/TalorLangnas/jaMove_client)
 
 ---
 
 ## ✨ Features
 
-- 🔐 User registration and login with instrument selection  
-- 👥 Role-based interface: Admin, Singer, and Instrumentalists  
-- 🧭 Full session control for Admin:
-  - Session starts automatically upon admin login
-  - Search and select songs in English or Hebrew
-  - End the song at any time to return all participants to the main page
-  - Logging out disconnects all users and closes the session  
-- 🎼 Adaptive live view based on user role:
-  - Singers view lyrics only
-  - Instrumentalists view both chords and lyrics  
+- 🔐 JWT-based user authentication (Admin and Player roles)    
+- 👤 User registration with instrument selection   
+- 🧭 Full session lifecycle management by admin:
+  - Automatically start a session on admin login
+  - Broadcast song selection to all connected players
+  - Quit song to return users to main screen
+  - Log out to automatically disconnect all players and close session 
+- 🎼 Role-based song rendering (lyrics/chords)
 - ⚡ Real-time session synchronization via WebSockets (Socket.IO)  
-- ⏬ Hands-free viewing with toggleable auto-scroll  
-- 📱 Mobile-first responsive design for smooth experience across devices
+- 🛡️ Secure password handling with bcrypt
+- 📦 Built-in frontend bundling support (React build served from `public/` directory)
+
 
 ---
 
@@ -109,3 +112,9 @@ npm run dev
 npm run build
 npm start
 ```
+
+The server will run at:  
+http://localhost:5000  
+
+If you’ve added the frontend build to the public/ directory, it will be served from the same domain.
+
